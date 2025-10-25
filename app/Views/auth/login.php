@@ -15,9 +15,10 @@ Admin Login
     </div>
     
     <div class="right-side">
-        <div class="admin-logo"></div>
+        <div class="school-logo">
+            <img src="<?= base_url('assets/images/rmmc-logo.png') ?>" alt="Ramon Magsaysay Memorial Colleges Logo">
+        </div>
         <h1 class="admin-title">ADMIN LOGIN</h1>
-        <div class="divider"></div>
         <p class="welcome-text">Welcome back!</p>
         
         <?php if (session()->getFlashdata('error')): ?>
@@ -71,11 +72,6 @@ Admin Login
             <button type="submit" class="login-btn">LOGIN</button>
         </form>
         
-        <div style="margin-top: 20px; font-size: 12px; color: #666;">
-            <p><strong>Demo Credentials:</strong></p>
-            <p>Email: admin@gym.com</p>
-            <p>Password: admin123</p>
-        </div>
     </div>
 </div>
 <?= $this->endSection() ?>

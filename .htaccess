@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Block direct access to public folder - multiple patterns
+RewriteCond %{REQUEST_URI} public/ [NC,OR]
+RewriteCond %{REQUEST_URI} /public/ [NC]
+RewriteRule ^(.*)$ - [F,L]
+
+# Handle all other requests through public folder
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]
