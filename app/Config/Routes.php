@@ -12,3 +12,8 @@ $routes->get('/login', 'Auth::login');
 $routes->post('/authenticate', 'Auth::authenticate');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Auth::dashboard');
+
+// Admin routes
+$routes->get('/manage-users', 'ManageUsers::index');
+$routes->post('/manage-users/add', 'ManageUsers::addUser');
+$routes->get('/manage-users/get-all', 'ManageUsers::getAllUsers');
