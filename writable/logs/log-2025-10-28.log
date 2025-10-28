@@ -64,3 +64,6 @@ FROM `gym_members`', [], false)
 11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
 12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-10-28 18:07:39 --> Validation failed: {"id":"ID already exists","email":"Email address already exists"}
+ERROR - 2025-10-28 18:07:44 --> Validation failed: {"id":"ID already exists","email":"Email address already exists"}
+ERROR - 2025-10-28 18:12:18 --> Validation failed: {"id":"ID already exists","email":"Email address already exists"}

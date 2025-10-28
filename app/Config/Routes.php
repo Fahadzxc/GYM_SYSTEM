@@ -16,4 +16,5 @@ $routes->get('/dashboard', 'Auth::dashboard');
 // Admin routes
 $routes->get('/manage-users', 'ManageUsers::index');
 $routes->post('/manage-users/add', 'ManageUsers::addUser');
+$routes->post('/manage-users/edit', 'ManageUsers::editUser');
 $routes->get('/manage-users/get-all', 'ManageUsers::getAllUsers');

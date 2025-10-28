@@ -40,6 +40,16 @@ class UserModel extends Model
         'user_type' => 'required|in_list[staff,athlete,faculty]'
     ];
 
+    // Validation rules for editing (allows same ID and email for current user)
+    protected $validationRulesEdit = [
+        'id' => 'required',
+        'first_name' => 'required|min_length[2]|max_length[50]',
+        'last_name' => 'required|min_length[2]|max_length[50]',
+        'email' => 'permit_empty|valid_email',
+        'phone_no' => 'permit_empty|min_length[10]|max_length[20]',
+        'user_type' => 'required|in_list[staff,athlete,faculty]'
+    ];
+
     protected $validationMessages = [
         'id' => [
             'required' => 'ID is required',
@@ -108,5 +118,14 @@ class UserModel extends Model
             ->orLike('member_id', $searchTerm)
             ->groupEnd()
             ->findAll();
+    }
+
+    /**
+     * Validate data for editing (allows same ID and email for current user)
+     */
+    public function validateEdit($data)
+    {
+        $this->validationRules = $this->validationRulesEdit;
+        return $this->validate($data);
     }
 }

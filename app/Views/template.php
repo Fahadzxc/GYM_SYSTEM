@@ -551,16 +551,18 @@
         .form-group select {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 2px solid #0A2E73;
             border-radius: 8px;
             font-size: 14px;
             transition: border-color 0.3s ease;
+            background-color: white;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #0A2E73;
+            box-shadow: 0 0 0 2px rgba(10, 46, 115, 0.2);
         }
 
         .modal-footer {
@@ -591,15 +593,6 @@
             transform: none;
         }
 
-        .form-group input:required,
-        .form-group select:required {
-            border-left: 3px solid #dc3545;
-        }
-
-        .form-group input:valid,
-        .form-group select:valid {
-            border-left: 3px solid #28a745;
-        }
 
         .data-table tbody tr:hover {
             background-color: #f8f9fa;
@@ -631,6 +624,41 @@
 
         .delete-btn:hover {
             background-color: #c82333;
+        }
+
+        .close-edit {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-edit:hover {
+            color: #000;
+        }
+
+        .save-user-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .save-user-btn:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+        }
+
+        .save-user-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            transform: none;
         }
 
         /* Premium Bodybuilder Animations */

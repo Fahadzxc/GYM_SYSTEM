@@ -67,6 +67,62 @@ class ManageUsers extends BaseController
         ]);
     }
 
+    public function editUser()
+    {
+        // Check if request is POST
+        if (!$this->request->is('post')) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        // Log the request for debugging
+        log_message('info', 'Edit user request received: ' . json_encode($this->request->getPost()));
+
+        $userId = $this->request->getPost('edit_user_id');
+        
+        // Get form data
+        $data = [
+            'id' => $this->request->getPost('edit_id'),
+            'first_name' => $this->request->getPost('edit_first_name'),
+            'middle_name' => $this->request->getPost('edit_middle_name'),
+            'last_name' => $this->request->getPost('edit_last_name'),
+            'address' => $this->request->getPost('edit_address'),
+            'phone_no' => $this->request->getPost('edit_phone_no'),
+            'email' => $this->request->getPost('edit_email'),
+            'user_type' => $this->request->getPost('edit_user_type'),
+            'status' => 'active'
+        ];
+
+        // Validate data for editing
+        if (!$this->userModel->validateEdit($data)) {
+            log_message('error', 'Validation failed: ' . json_encode($this->userModel->errors()));
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $this->userModel->errors()
+            ]);
+        }
+
+        // Update the user
+        if (!$this->userModel->update($userId, $data)) {
+            log_message('error', 'Update failed');
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update member'
+            ]);
+        }
+
+        log_message('info', 'User updated successfully: ' . json_encode($data));
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Member updated successfully!',
+            'data' => $data
+        ]);
+    }
+
     public function getAllUsers()
     {
         $members = $this->userModel->findAll();

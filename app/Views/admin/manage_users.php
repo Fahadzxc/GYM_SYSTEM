@@ -120,6 +120,70 @@ Manage Users
     </div>
 </div>
 
+<!-- Edit User Modal -->
+<div id="editUserModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edit User</h2>
+            <span class="close-edit">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="editUserForm">
+                <?= csrf_field() ?>
+                <input type="hidden" id="edit_user_id" name="edit_user_id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit_id">ID *</label>
+                        <input type="text" id="edit_id" name="edit_id" placeholder="Enter ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_first_name">First Name *</label>
+                        <input type="text" id="edit_first_name" name="edit_first_name" placeholder="Enter First Name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit_middle_name">Middle Name</label>
+                        <input type="text" id="edit_middle_name" name="edit_middle_name" placeholder="Enter Middle Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_last_name">Last Name *</label>
+                        <input type="text" id="edit_last_name" name="edit_last_name" placeholder="Enter Last Name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit_address">Address</label>
+                        <input type="text" id="edit_address" name="edit_address" placeholder="Enter Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_phone_no">Phone No.</label>
+                        <input type="text" id="edit_phone_no" name="edit_phone_no" placeholder="Enter Phone Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit_email">Email</label>
+                        <input type="email" id="edit_email" name="edit_email" placeholder="Enter Email Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_user_type">User Type *</label>
+                        <select id="edit_user_type" name="edit_user_type" required>
+                            <option value="">Select User Type</option>
+                            <option value="staff">Staff</option>
+                            <option value="athlete">Athlete</option>
+                            <option value="faculty">Faculty</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="save-user-btn">SAVE</button>
+        </div>
+    </div>
+</div>
+
 <script>
 // Modal functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -128,6 +192,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close');
     const addUserSubmitBtn = document.querySelector('.add-user-submit-btn');
     const addUserForm = document.getElementById('addUserForm');
+
+    // Edit modal elements
+    const editModal = document.getElementById('editUserModal');
+    const closeEditBtn = document.querySelector('.close-edit');
+    const saveUserBtn = document.querySelector('.save-user-btn');
+    const editUserForm = document.getElementById('editUserForm');
 
     // Open modal
     addUserBtn.addEventListener('click', function() {
@@ -147,6 +217,26 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
             addUserForm.reset(); // Clear form when closing
         }
+        if (event.target === editModal) {
+            editModal.style.display = 'none';
+            editUserForm.reset(); // Clear form when closing
+        }
+    });
+
+    // Edit modal event listeners
+    closeEditBtn.addEventListener('click', function() {
+        editModal.style.display = 'none';
+        editUserForm.reset();
+    });
+
+    // Handle edit form submission
+    saveUserBtn.addEventListener('click', function() {
+        submitEditForm();
+    });
+
+    editUserForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitEditForm();
     });
 
     // Handle form submission
@@ -222,9 +312,89 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to edit member (placeholder)
+    function submitEditForm() {
+        // Get form data
+        const formData = new FormData(editUserForm);
+        
+        // Debug: Log form data
+        console.log('Edit form data:', Object.fromEntries(formData));
+        
+        // Show loading state
+        saveUserBtn.disabled = true;
+        saveUserBtn.textContent = 'Saving...';
+
+        // Submit form data
+        fetch('<?= base_url('manage-users/edit') ?>', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Response data:', data);
+            if (data.success) {
+                // Show success message
+                showMessage(data.message, 'success');
+                
+                // Close modal
+                editModal.style.display = 'none';
+                editUserForm.reset();
+                
+                // Reload page to show updated member
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            } else {
+                // Show error message
+                let errorMessage = data.message;
+                if (data.errors) {
+                    errorMessage += '<br><br><strong>Errors:</strong><ul>';
+                    for (const field in data.errors) {
+                        errorMessage += `<li>${data.errors[field]}</li>`;
+                    }
+                    errorMessage += '</ul>';
+                }
+                showMessage(errorMessage, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('An error occurred while updating the member. Please try again.', 'error');
+        })
+        .finally(() => {
+            // Reset button state
+            saveUserBtn.disabled = false;
+            saveUserBtn.textContent = 'SAVE';
+        });
+    }
+
+    // Function to edit member
     window.editMember = function(memberId) {
-        alert('Edit functionality will be implemented soon! Member ID: ' + memberId);
+        // Find the member data
+        const members = <?= json_encode($members) ?>;
+        const member = members.find(m => m.id == memberId);
+        
+        if (member) {
+            // Populate the edit form
+            document.getElementById('edit_user_id').value = member.id;
+            document.getElementById('edit_id').value = member.id;
+            document.getElementById('edit_first_name').value = member.first_name;
+            document.getElementById('edit_middle_name').value = member.middle_name || '';
+            document.getElementById('edit_last_name').value = member.last_name;
+            document.getElementById('edit_address').value = member.address || '';
+            document.getElementById('edit_phone_no').value = member.phone_no || '';
+            document.getElementById('edit_email').value = member.email || '';
+            document.getElementById('edit_user_type').value = member.user_type;
+            
+            // Show the edit modal
+            document.getElementById('editUserModal').style.display = 'block';
+        }
     };
 
     // Function to delete member (placeholder)
