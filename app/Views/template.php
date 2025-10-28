@@ -17,6 +17,13 @@
             font-family: 'Poppins', 'Inter', sans-serif;
             height: 100vh;
             overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
         }
 
         .container {
@@ -227,6 +234,191 @@
             font-size: 12px;
             margin-top: 5px;
             display: none;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #081A3E;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .logo-placeholder {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #081A3E;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 20px 15px;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 25px;
+            margin: 0 5px;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        .nav-item.active .nav-link {
+            background-color: #F3C85D;
+            color: #081A3E;
+            font-weight: 700;
+        }
+
+        .nav-icon {
+            margin-right: 15px;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 20px 15px;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #dc3545;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 25px;
+            margin: 0 5px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            background-color: #FFF2DC;
+            padding: 40px;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        .content-header {
+            margin-bottom: 35px;
+        }
+
+        .content-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2c3e50;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .content-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid #0A2E73;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background-color: white;
+        }
+
+        .data-table th {
+            background-color: white;
+            color: #000;
+            font-weight: 600;
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .data-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #ddd;
+            color: #000;
+            font-size: 14px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .data-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-green {
+            background-color: #28a745;
+        }
+
+        .dot-red {
+            background-color: #dc3545;
         }
 
         /* Premium Bodybuilder Animations */
