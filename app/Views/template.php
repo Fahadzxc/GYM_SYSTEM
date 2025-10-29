@@ -661,6 +661,238 @@
             transform: none;
         }
 
+        .confirm-delete-btn {
+            background-color: #4285F4;
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-delete-btn:hover {
+            background-color: #3367D6;
+            transform: translateY(-1px);
+        }
+
+        .cancel-delete-btn {
+            background-color: #E0E0E0;
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-delete-btn:hover {
+            background-color: #D0D0D0;
+            transform: translateY(-1px);
+        }
+
+        /* Profile Page Styles */
+        .profile-container {
+            padding: 30px;
+            background-color: #FFF8E7;
+            min-height: calc(100vh - 40px);
+            display: flex;
+            justify-content: center; /* center vertically */
+            align-items: center;
+        }
+
+        .profile-content {
+            width: 1140px;          /* even wider to fill space */
+            max-width: 98%;
+        }
+
+        .profile-section {
+            margin-bottom: 30px; /* left-aligned like the design */
+            display: block;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+        }
+
+        .avatar-placeholder {
+            width: 160px;          /* larger avatar */
+            height: 160px;
+            background-color: #E0E0E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            flex-shrink: 0;
+        }
+
+        .user-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .user-name {
+            font-size: 36px;       /* larger name text */
+            font-weight: 700;
+            color: #0A2E73;
+            margin: 0 0 10px 0;
+        }
+
+        .user-role {
+            font-size: 18px;
+            color: #666;
+            margin: 0 0 15px 0;
+        }
+
+        .verified-badge {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .edit-profile-btn {
+            background-color: #E0E0E0;
+            color: #000;
+            border: none;
+            padding: 16px 26px;   /* slightly taller */
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 360px;         /* wider button like reference */
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* Center the button under the text block */
+        .user-details .edit-profile-btn {
+            align-self: flex-start; /* align under name (left aligned) */
+        }
+
+        .edit-profile-btn:hover {
+            background-color: #D0D0D0;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #E0E0E0;
+            margin: 16px 0 8px 0;
+        }
+
+        .refresh-icon-center {
+            width: 32px;
+            height: 32px;
+            background-color: #E0E0E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            margin: -16px auto 10px auto; /* sits on the divider */
+            font-size: 16px;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1140px;    /* wider activity box */
+            margin: 0 auto 18px auto;
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .refresh-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #E0E0E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .activity-title {
+            font-size: 14px;
+            font-weight: 700;  /* bolder like reference */
+            color: #333;
+            margin: 0;
+        }
+
+        .export-btn {
+            background-color: white;
+            color: #666;
+            border: 1px solid #E0E0E0;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background-color: #F5F5F5;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .activity-item {
+            border-bottom: 1px solid #F0F0F0;
+            padding: 15px 0;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-text {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;    /* bold left column text */
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
         /* Premium Bodybuilder Animations */
         @keyframes neonPulse {
             0%, 100% {

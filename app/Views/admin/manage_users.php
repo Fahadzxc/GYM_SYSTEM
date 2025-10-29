@@ -397,12 +397,65 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Function to delete member (placeholder)
-    window.deleteMember = function(memberId) {
-        if (confirm('Are you sure you want to delete this member?')) {
-            alert('Delete functionality will be implemented soon! Member ID: ' + memberId);
+    // Delete functionality
+    let deleteUserId = null;
+    const deleteModal = document.getElementById('deleteModal');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+
+    function deleteMember(userId) {
+        deleteUserId = userId;
+        deleteModal.style.display = 'block';
+    }
+
+    // Make deleteMember globally accessible
+    window.deleteMember = deleteMember;
+
+    // Close delete modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target === deleteModal) {
+            deleteModal.style.display = 'none';
         }
-    };
+    }
+
+    // Cancel delete
+    cancelDeleteBtn.addEventListener('click', function() {
+        deleteModal.style.display = 'none';
+        deleteUserId = null;
+    });
+
+    // Confirm delete
+    confirmDeleteBtn.addEventListener('click', function() {
+        if (deleteUserId) {
+            fetch('<?= base_url('manage-users/delete') ?>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    '<?= csrf_token() ?>': '<?= csrf_hash() ?>',
+                    user_id: deleteUserId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showMessage(data.message, 'success');
+                    deleteModal.style.display = 'none';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('An error occurred while deleting the member. Please try again.', 'error');
+            });
+        }
+    });
 
     // Function to show messages
     function showMessage(message, type) {
@@ -427,4 +480,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal" style="padding-top: 0px;">
+    <div class="modal-content" style="max-width: 400px; text-align: center; border-radius: 8px; background-color: white; border: 1px solid #0A2E73; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+        <div class="modal-body" style="padding: 30px 25px 20px 25px;">
+            <p style="font-size: 16px; color: #333; margin: 0; font-weight: 500;">Do you want to delete it?</p>
+        </div>
+        <div class="modal-footer" style="text-align: center; padding: 0 25px 25px 25px;">
+            <button id="cancelDeleteBtn" class="cancel-delete-btn" style="margin-right: 15px;">Cancel</button>
+            <button id="confirmDeleteBtn" class="confirm-delete-btn">Ok</button>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection() ?>

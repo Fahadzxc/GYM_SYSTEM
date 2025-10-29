@@ -64,4 +64,14 @@ class Auth extends BaseController
         
         return view('auth/dashboard');
     }
+    
+    public function profile()
+    {
+        // Check if user is logged in
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Please login to access profile');
+        }
+        
+        return view('admin/profile');
+    }
 }

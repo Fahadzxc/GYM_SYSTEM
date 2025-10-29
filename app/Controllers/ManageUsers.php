@@ -131,4 +131,49 @@ class ManageUsers extends BaseController
             'data' => $members
         ]);
     }
+
+    public function deleteUser()
+    {
+        if (!$this->request->is('post')) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $userId = $this->request->getJSON(true)['user_id'] ?? null;
+        
+        if (!$userId) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'User ID is required'
+            ]);
+        }
+
+        log_message('info', 'Delete user request received for ID: ' . $userId);
+
+        // Check if user exists
+        $user = $this->userModel->find($userId);
+        if (!$user) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'User not found'
+            ]);
+        }
+
+        // Delete the user
+        if ($this->userModel->delete($userId)) {
+            log_message('info', 'User deleted successfully: ' . $userId);
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Member deleted successfully!'
+            ]);
+        } else {
+            log_message('error', 'Failed to delete user: ' . $userId);
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to delete member'
+            ]);
+        }
+    }
 }
