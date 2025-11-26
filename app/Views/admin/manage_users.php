@@ -35,7 +35,7 @@ Manage Users
                         <?php foreach ($members as $member): ?>
                             <tr>
                                 <td><?= esc($member['id']) ?></td>
-                                <td><?= esc($member['first_name'] . ' ' . $member['last_name']) ?></td>
+                              <td><?= esc($member['first_name'] . ' ' . $member['last_name']) ?></td>
                                 <td><?= esc($member['address']) ?></td>
                                 <td><?= esc($member['phone_no']) ?></td>
                                 <td><?= esc($member['email']) ?></td>
