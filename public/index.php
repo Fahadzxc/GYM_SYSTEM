@@ -1,5 +1,17 @@
 <?php
 
+// Redirect if URL contains full file path (wrong URL pattern)
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+$theRequest = $_SERVER['THE_REQUEST'] ?? '';
+if (strpos($requestUri, '/F:/') !== false || 
+    strpos($requestUri, '/xammp/') !== false || 
+    strpos($requestUri, '/htdocs/') !== false ||
+    strpos($theRequest, '/F:/') !== false ||
+    strpos($theRequest, 'F:') !== false) {
+    header('Location: /GYM_SYSTEM/public/', true, 301);
+    exit;
+}
+
 use CodeIgniter\Boot;
 use Config\Paths;
 

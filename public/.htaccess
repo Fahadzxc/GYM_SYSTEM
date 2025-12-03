@@ -1,23 +1,22 @@
 # Disable directory browsing
-Options -Indexes
+Options -Indexes +FollowSymLinks
 
-# ----------------------------------------------------------------------
-# Rewrite engine
-# ----------------------------------------------------------------------
-
-# Turning on the rewrite engine is necessary for the following rules and features.
-# FollowSymLinks must be enabled for this to work.
 <IfModule mod_rewrite.c>
 	Options +FollowSymlinks
 	RewriteEngine On
 
-	# If you installed CodeIgniter in a subfolder, you will need to
-	# change the following line to match the subfolder you need.
-	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
-	# RewriteBase /
+	# Set the base path for the subfolder
+	RewriteBase /GYM_SYSTEM/public/
 
-	# Redirect Trailing Slashes...
+	# CRITICAL: Redirect wrong URL patterns FIRST
+	RewriteCond %{THE_REQUEST} \s/F:/ [NC,OR]
+	RewriteCond %{THE_REQUEST} \s/xammp/ [NC,OR]
+	RewriteCond %{THE_REQUEST} \s/htdocs/ [NC]
+	RewriteRule .* /GYM_SYSTEM/public/ [R=301,L]
+
+	# Redirect Trailing Slashes (but not for root)
 	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_URI} !^/GYM_SYSTEM/public/?$ [NC]
 	RewriteCond %{REQUEST_URI} (.+)/$
 	RewriteRule ^ %1 [L,R=301]
 
@@ -39,11 +38,8 @@ Options -Indexes
 </IfModule>
 
 <IfModule !mod_rewrite.c>
-	# If we don't have mod_rewrite installed, all 404's
-	# can be sent to index.php, and everything works as normal.
 	ErrorDocument 404 index.php
 </IfModule>
 
-# Disable server signature start
+# Disable server signature
 ServerSignature Off
-# Disable server signature end

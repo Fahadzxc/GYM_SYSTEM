@@ -1,0 +1,770 @@
+ERROR - 2025-12-03 15:37:27 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-12-03 15:37:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+[Method: POST, Route: authenticate]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:', [...], false)
+ 3 APPPATH\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-03 15:37:32 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-12-03 15:37:32 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+[Method: POST, Route: authenticate]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:', [...], false)
+ 3 APPPATH\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-03 15:37:33 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-12-03 15:37:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+[Method: POST, Route: authenticate]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:', [...], false)
+ 3 APPPATH\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-03 15:37:37 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-12-03 15:37:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+[Method: POST, Route: authenticate]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:', [...], false)
+ 3 APPPATH\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-03 15:37:47 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-12-03 15:37:47 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+[Method: POST, Route: authenticate]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:', [...], false)
+ 3 APPPATH\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-03 15:38:50 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-12-03 15:38:50 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+[Method: POST, Route: authenticate]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `email` = :email:', [...], false)
+ 3 APPPATH\Controllers\Auth.php(38): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-03 15:38:56 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:38:56 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:43:05 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:43:05 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:44:22 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:44:22 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:44:22 --> Stack trace: #0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(44): CodeIgniter\Database\BaseBuilder->get()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+ERROR - 2025-12-03 15:44:43 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:44:43 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:44:43 --> Stack trace: #0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+ERROR - 2025-12-03 15:47:36 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:47:36 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:47:36 --> Stack trace: #0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+ERROR - 2025-12-03 15:52:22 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:52:22 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:52:22 --> Stack trace: #0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+ERROR - 2025-12-03 15:57:31 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'gym_system', 3306, '', 0)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'gym_system' in F:\xammp\htdocs\GYM_SYSTEM\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+ERROR - 2025-12-03 15:57:31 --> Login error: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'gym_system'
+ERROR - 2025-12-03 15:57:31 --> Stack trace: #0 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#1 F:\xammp\htdocs\GYM_SYSTEM\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 F:\xammp\htdocs\GYM_SYSTEM\app\Controllers\Auth.php(50): CodeIgniter\Database\BaseBuilder->get()
+#3 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(933): App\Controllers\Auth->authenticate()
+#4 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#5 F:\xammp\htdocs\GYM_SYSTEM\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 F:\xammp\htdocs\GYM_SYSTEM\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 F:\xammp\htdocs\GYM_SYSTEM\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+CRITICAL - 2025-12-03 16:15:25 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:26 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:33 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:33 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:33 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:34 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:35 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:35 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:35 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:37 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:15:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:16:04 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:16:04 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-03 16:16:05 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "combined_login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('combined_login.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('combined_login', [], true)
+ 3 APPPATH\Controllers\RfidController.php(31): view('combined_login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RfidController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RfidController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

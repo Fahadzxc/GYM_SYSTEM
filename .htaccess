@@ -1,11 +1,29 @@
 RewriteEngine On
+Options -Indexes
 
-# Block direct access to public folder - multiple patterns
-RewriteCond %{REQUEST_URI} public/ [NC,OR]
-RewriteCond %{REQUEST_URI} /public/ [NC]
-RewriteRule ^(.*)$ - [F,L]
+# Set base for rewriting
+RewriteBase /GYM_SYSTEM/
 
-# Handle all other requests through public folder
+# CRITICAL: Redirect wrong URL patterns FIRST
+RewriteCond %{THE_REQUEST} \s/F:/ [NC,OR]
+RewriteCond %{THE_REQUEST} \s/xammp/ [NC,OR]
+RewriteCond %{THE_REQUEST} \s/htdocs/ [NC]
+RewriteRule .* /GYM_SYSTEM/public/ [R=301,L]
+
+# If accessing root without /public/, redirect to /public/
+RewriteCond %{REQUEST_URI} ^/GYM_SYSTEM/?$ [NC]
+RewriteRule ^$ /GYM_SYSTEM/public/ [R=301,L]
+
+# Remove index.php from URL if present
+RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+RewriteRule ^(.*)index\.php(.*)$ /GYM_SYSTEM/public/$1$2 [R=301,L]
+
+# Remove double slashes
+RewriteCond %{REQUEST_URI} ^(.*)//(.*)$
+RewriteRule (.*)//(.*)$ $1/$2 [R=301,L]
+
+# If NOT in /public/ already, rewrite internally to public folder
+RewriteCond %{REQUEST_URI} !^/GYM_SYSTEM/public/ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ public/$1 [L]
+RewriteRule ^(.*)$ public/$1 [L,QSA]

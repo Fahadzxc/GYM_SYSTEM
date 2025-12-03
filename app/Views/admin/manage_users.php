@@ -61,26 +61,36 @@ Manage Users
 <div id="addUserModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Add new user</h2>
+            <h2>Add New User - School ID Registration</h2>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-            <form id="addUserForm">
-                <?= csrf_field() ?>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="id">ID *</label>
-                        <input type="text" id="id" name="id" placeholder="Enter ID" required>
+            <!-- School ID Check Section -->
+            <div id="schoolIdCheckSection">
+                <div class="form-row" style="margin-bottom: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="school_id">School ID * <span style="font-size: 12px; color: #666;">(Scan or enter)</span></label>
+                        <input type="text" id="school_id" name="school_id" placeholder="Scan school ID card or enter ID manually" 
+                               style="font-size: 18px; letter-spacing: 1px; text-align: center;" autofocus>
                     </div>
+                </div>
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <button type="button" id="checkSchoolIdBtn" class="add-user-submit-btn" style="width: auto; padding: 10px 30px;">
+                        Check School ID
+                    </button>
+                </div>
+                <div id="schoolIdStatus" style="display: none; padding: 10px; border-radius: 8px; margin-bottom: 15px;"></div>
+            </div>
+
+            <!-- Registration Form (initially hidden) -->
+            <form id="addUserForm" style="display: none;">
+                <?= csrf_field() ?>
+                <input type="hidden" id="id" name="id">
+                
+                <div class="form-row">
                     <div class="form-group">
                         <label for="first_name">First Name *</label>
                         <input type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="middle_name">Middle Name</label>
-                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter Middle Name">
                     </div>
                     <div class="form-group">
                         <label for="last_name">Last Name *</label>
@@ -89,12 +99,17 @@ Manage Users
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" id="address" name="address" placeholder="Enter Address">
+                        <label for="middle_name">Middle Name</label>
+                        <input type="text" id="middle_name" name="middle_name" placeholder="Enter Middle Name">
                     </div>
                     <div class="form-group">
-                        <label for="phone_no">Phone No.</label>
-                        <input type="text" id="phone_no" name="phone_no" placeholder="Enter Phone Number">
+                        <label for="user_type">User Type *</label>
+                        <select id="user_type" name="user_type" required>
+                            <option value="">Select User Type</option>
+                            <option value="staff">Staff/Admin</option>
+                            <option value="athlete">Athlete</option>
+                            <option value="faculty">Faculty</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">
@@ -103,19 +118,20 @@ Manage Users
                         <input type="email" id="email" name="email" placeholder="Enter Email Address">
                     </div>
                     <div class="form-group">
-                        <label for="user_type">User Type *</label>
-                        <select id="user_type" name="user_type" required>
-                            <option value="">Select User Type</option>
-                            <option value="staff">Staff</option>
-                            <option value="athlete">Athlete</option>
-                            <option value="faculty">Faculty</option>
-                        </select>
+                        <label for="phone_no">Phone No.</label>
+                        <input type="text" id="phone_no" name="phone_no" placeholder="Enter Phone Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="Enter Address">
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="add-user-submit-btn">Add User</button>
+            <button class="add-user-submit-btn" id="registerUserBtn" style="display: none;">Complete Registration</button>
         </div>
     </div>
 </div>
@@ -190,8 +206,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('addUserModal');
     const addUserBtn = document.querySelector('.add-user-btn');
     const closeBtn = document.querySelector('.close');
-    const addUserSubmitBtn = document.querySelector('.add-user-submit-btn');
     const addUserForm = document.getElementById('addUserForm');
+    const schoolIdInput = document.getElementById('school_id');
+    const checkSchoolIdBtn = document.getElementById('checkSchoolIdBtn');
+    const schoolIdStatus = document.getElementById('schoolIdStatus');
+    const schoolIdCheckSection = document.getElementById('schoolIdCheckSection');
+    const registerUserBtn = document.getElementById('registerUserBtn');
+    let isSchoolIdVerified = false;
 
     // Edit modal elements
     const editModal = document.getElementById('editUserModal');
@@ -199,29 +220,160 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveUserBtn = document.querySelector('.save-user-btn');
     const editUserForm = document.getElementById('editUserForm');
 
-    // Open modal
+    // Open modal - reset everything
     addUserBtn.addEventListener('click', function() {
         modal.style.display = 'block';
-        addUserForm.reset(); // Clear form when opening
+        resetAddUserModal();
     });
 
     // Close modal
     closeBtn.addEventListener('click', function() {
         modal.style.display = 'none';
-        addUserForm.reset(); // Clear form when closing
+        resetAddUserModal();
     });
+
+    // Reset add user modal
+    function resetAddUserModal() {
+        addUserForm.reset();
+        schoolIdInput.value = '';
+        schoolIdStatus.style.display = 'none';
+        schoolIdStatus.innerHTML = '';
+        schoolIdCheckSection.style.display = 'block';
+        addUserForm.style.display = 'none';
+        registerUserBtn.style.display = 'none';
+        isSchoolIdVerified = false;
+        schoolIdInput.focus();
+    }
 
     // Close modal when clicking outside
     window.addEventListener('click', function(event) {
         if (event.target === modal) {
             modal.style.display = 'none';
-            addUserForm.reset(); // Clear form when closing
+            resetAddUserModal();
         }
         if (event.target === editModal) {
             editModal.style.display = 'none';
             editUserForm.reset(); // Clear form when closing
         }
     });
+
+    // School ID input - handle RFID scanning (auto-submit after delay)
+    let schoolIdTimeout = null;
+    schoolIdInput.addEventListener('input', function() {
+        clearTimeout(schoolIdTimeout);
+        schoolIdTimeout = setTimeout(function() {
+            if (schoolIdInput.value.trim().length > 0) {
+                checkSchoolId();
+            }
+        }, 500); // Wait 500ms after last keystroke
+    });
+
+    // Check School ID button
+    checkSchoolIdBtn.addEventListener('click', function() {
+        checkSchoolId();
+    });
+
+    // Enter key on school ID input
+    schoolIdInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkSchoolId();
+        }
+    });
+
+    // Check School ID function
+    function checkSchoolId() {
+        const schoolId = schoolIdInput.value.trim();
+        
+        if (!schoolId) {
+            showSchoolIdStatus('Please enter or scan a school ID.', 'error');
+            return;
+        }
+
+        checkSchoolIdBtn.disabled = true;
+        checkSchoolIdBtn.textContent = 'Checking...';
+        schoolIdStatus.style.display = 'none';
+
+        const formData = new FormData();
+        formData.append('school_id', schoolId);
+        formData.append('<?= csrf_token() ?>', '<?= csrf_hash() ?>');
+
+        fetch('<?= base_url('manage-users/check-school-id') ?>', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            checkSchoolIdBtn.disabled = false;
+            checkSchoolIdBtn.textContent = 'Check School ID';
+
+            if (data.success) {
+                // School ID is eligible and not registered
+                showSchoolIdStatus('✓ School ID verified. Please complete the registration form.', 'success');
+                isSchoolIdVerified = true;
+                
+                // Set the ID field
+                document.getElementById('id').value = schoolId;
+                
+                // Auto-fill form if member info is available
+                if (data.member_info) {
+                    if (data.member_info.first_name) document.getElementById('first_name').value = data.member_info.first_name;
+                    if (data.member_info.middle_name) document.getElementById('middle_name').value = data.member_info.middle_name;
+                    if (data.member_info.last_name) document.getElementById('last_name').value = data.member_info.last_name;
+                    if (data.member_info.email) document.getElementById('email').value = data.member_info.email;
+                    if (data.member_info.phone_no) document.getElementById('phone_no').value = data.member_info.phone_no;
+                    if (data.member_info.address) document.getElementById('address').value = data.member_info.address;
+                    if (data.suggested_user_type) document.getElementById('user_type').value = data.suggested_user_type;
+                }
+                
+                // Show registration form
+                schoolIdCheckSection.style.display = 'none';
+                addUserForm.style.display = 'block';
+                registerUserBtn.style.display = 'block';
+                
+                // Focus on first name field
+                document.getElementById('first_name').focus();
+            } else {
+                // Error - show message
+                if (data.already_registered) {
+                    showSchoolIdStatus('⚠ This ID is already registered. Member: ' + 
+                        (data.member_data ? (data.member_data.first_name + ' ' + data.member_data.last_name) : 'N/A'), 
+                        'error');
+                } else if (!data.eligible) {
+                    showSchoolIdStatus('✗ ' + data.message, 'error');
+                } else {
+                    showSchoolIdStatus('✗ ' + (data.message || 'An error occurred.'), 'error');
+                }
+                isSchoolIdVerified = false;
+            }
+        })
+        .catch(error => {
+            checkSchoolIdBtn.disabled = false;
+            checkSchoolIdBtn.textContent = 'Check School ID';
+            console.error('Error:', error);
+            showSchoolIdStatus('✗ Network error. Please try again.', 'error');
+            isSchoolIdVerified = false;
+        });
+    }
+
+    // Show school ID status message
+    function showSchoolIdStatus(message, type) {
+        schoolIdStatus.innerHTML = message;
+        schoolIdStatus.style.display = 'block';
+        
+        if (type === 'success') {
+            schoolIdStatus.style.backgroundColor = '#d4edda';
+            schoolIdStatus.style.color = '#155724';
+            schoolIdStatus.style.border = '1px solid #c3e6cb';
+        } else if (type === 'error') {
+            schoolIdStatus.style.backgroundColor = '#f8d7da';
+            schoolIdStatus.style.color = '#721c24';
+            schoolIdStatus.style.border = '1px solid #f5c6cb';
+        }
+    }
 
     // Edit modal event listeners
     closeEditBtn.addEventListener('click', function() {
@@ -239,27 +391,33 @@ document.addEventListener('DOMContentLoaded', function() {
         submitEditForm();
     });
 
-    // Handle form submission
-    addUserSubmitBtn.addEventListener('click', function() {
-        submitForm();
+    // Handle registration form submission
+    registerUserBtn.addEventListener('click', function() {
+        submitRegistrationForm();
     });
 
     // Handle form submission on Enter key
     addUserForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        submitForm();
+        submitRegistrationForm();
     });
 
-    function submitForm() {
+    function submitRegistrationForm() {
+        // Verify school ID was checked
+        if (!isSchoolIdVerified) {
+            showMessage('Please verify the school ID first.', 'error');
+            return;
+        }
+
         // Get form data
         const formData = new FormData(addUserForm);
         
         // Debug: Log form data
-        console.log('Form data:', Object.fromEntries(formData));
+        console.log('Registration form data:', Object.fromEntries(formData));
         
         // Show loading state
-        addUserSubmitBtn.disabled = true;
-        addUserSubmitBtn.textContent = 'Adding...';
+        registerUserBtn.disabled = true;
+        registerUserBtn.textContent = 'Registering...';
 
         // Submit form data
         fetch('<?= base_url('manage-users/add') ?>', {
@@ -271,7 +429,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers);
             return response.json();
         })
         .then(data => {
@@ -282,7 +439,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Close modal
                 modal.style.display = 'none';
-                addUserForm.reset();
+                resetAddUserModal();
                 
                 // Reload page to show new member
                 setTimeout(() => {
@@ -303,12 +460,12 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            showMessage('An error occurred while adding the member. Please try again.', 'error');
+            showMessage('An error occurred while registering the member. Please try again.', 'error');
         })
         .finally(() => {
             // Reset button state
-            addUserSubmitBtn.disabled = false;
-            addUserSubmitBtn.textContent = 'Add User';
+            registerUserBtn.disabled = false;
+            registerUserBtn.textContent = 'Complete Registration';
         });
     }
 

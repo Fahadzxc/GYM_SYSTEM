@@ -19,10 +19,16 @@ class Auth extends BaseController
     
     public function authenticate()
     {
+        // Only allow POST requests
+        if (!$this->request->is('post')) {
+            return redirect()->to('/login')->with('error', 'Invalid request method');
+        }
+        
+        try {
         $validation = \Config\Services::validation();
         
         $validation->setRules([
-            'email' => 'required|valid_email',
+                'email' => 'required|valid_email',
             'password' => 'required|min_length[6]'
         ]);
         
@@ -30,22 +36,53 @@ class Auth extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
         
-        $email = $this->request->getPost('email');
+            $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         
-        // Here you would typically check against your database
-        // For demo purposes, using hardcoded credentials
-        if ($email === 'admin@gym.com' && $password === 'admin123') {
+        // Check against database
+        $db = \Config\Database::connect();
+            
+            // Check if database connection is working
+            if (!$db) {
+                throw new \Exception('Database connection failed');
+            }
+            
+            $user = $db->table('users')->where('email', $email)->get()->getRowArray();
+        
+            if (!$user) {
+                return redirect()->back()->withInput()->with('error', 'Invalid email or password');
+            }
+            
+            // Verify password
+            if (!password_verify($password, $user['password'])) {
+                return redirect()->back()->withInput()->with('error', 'Invalid email or password');
+            }
+            
+            // Check if user is active
+            if ($user['status'] !== 'active') {
+                return redirect()->back()->withInput()->with('error', 'Your account is inactive. Please contact administrator.');
+            }
+            
             $sessionData = [
-                'user_id' => 1,
-                'email' => $email,
+                'user_id' => $user['id'],
+                'email' => $user['email'],
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'role' => $user['role'],
                 'isLoggedIn' => true
             ];
             
             session()->set($sessionData);
             return redirect()->to('/dashboard')->with('success', 'Login successful!');
-        } else {
-            return redirect()->back()->withInput()->with('error', 'Invalid email or password');
+            
+        } catch (\Exception $e) {
+            log_message('error', 'Login error: ' . $e->getMessage());
+            log_message('error', 'Stack trace: ' . $e->getTraceAsString());
+            
+            // Always show the actual error for debugging
+            $errorMessage = 'Error: ' . $e->getMessage() . ' (Line: ' . $e->getLine() . ')';
+            
+            return redirect()->back()->withInput()->with('error', $errorMessage);
         }
     }
     
@@ -62,7 +99,34 @@ class Auth extends BaseController
             return redirect()->to('/login')->with('error', 'Please login to access dashboard');
         }
         
-        return view('auth/dashboard');
+        // Get today's attendance records with member details
+        $db = \Config\Database::connect();
+        $today = date('Y-m-d');
+        
+        $builder = $db->table('rfid_attendance');
+        $builder->select('rfid_attendance.*, 
+                         gym_members.first_name, 
+                         gym_members.middle_name, 
+                         gym_members.last_name, 
+                         gym_members.user_type,
+                         gym_members.status');
+        $builder->join('gym_members', 'gym_members.id = rfid_attendance.member_id', 'left');
+        $builder->where('DATE(rfid_attendance.scan_time)', $today);
+        $builder->orderBy('rfid_attendance.scan_time', 'DESC');
+        
+        $todayAttendance = $builder->get()->getResultArray();
+        
+        // Get statistics
+        $totalToday = count($todayAttendance);
+        $uniqueMembers = count(array_unique(array_column($todayAttendance, 'member_id')));
+        
+        $data = [
+            'attendance' => $todayAttendance,
+            'total_today' => $totalToday,
+            'unique_members' => $uniqueMembers
+        ];
+        
+        return view('auth/dashboard', $data);
     }
     
     public function profile()

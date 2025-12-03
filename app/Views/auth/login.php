@@ -27,6 +27,22 @@ Admin Login
             </div>
         <?php endif; ?>
         
+        <?php 
+        $errors = session()->getFlashdata('errors');
+        if ($errors && is_array($errors)): 
+            foreach ($errors as $field => $error): 
+                if (is_array($error)) {
+                    $error = implode(', ', $error);
+                }
+        ?>
+            <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+                <?= $error ?>
+            </div>
+        <?php 
+            endforeach;
+        endif; 
+        ?>
+        
         <?php if (session()->getFlashdata('success')): ?>
             <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
                 <?= session()->getFlashdata('success') ?>
@@ -48,8 +64,12 @@ Admin Login
                     autocomplete="email"
                 >
                 <div id="email-error" class="error-message"></div>
-                <?php if (isset($errors['email'])): ?>
-                    <div class="error-message" style="display: block;"><?= $errors['email'] ?></div>
+                <?php 
+                $validationErrors = session()->getFlashdata('errors');
+                if (isset($validationErrors['email'])): 
+                    $emailError = is_array($validationErrors['email']) ? implode(', ', $validationErrors['email']) : $validationErrors['email'];
+                ?>
+                    <div class="error-message" style="display: block; color: #721c24; font-size: 12px; margin-top: 5px;"><?= $emailError ?></div>
                 <?php endif; ?>
             </div>
             
@@ -64,8 +84,12 @@ Admin Login
                     autocomplete="current-password"
                 >
                 <div id="password-error" class="error-message"></div>
-                <?php if (isset($errors['password'])): ?>
-                    <div class="error-message" style="display: block;"><?= $errors['password'] ?></div>
+                <?php 
+                $validationErrors = session()->getFlashdata('errors');
+                if (isset($validationErrors['password'])): 
+                    $passwordError = is_array($validationErrors['password']) ? implode(', ', $validationErrors['password']) : $validationErrors['password'];
+                ?>
+                    <div class="error-message" style="display: block; color: #721c24; font-size: 12px; margin-top: 5px;"><?= $passwordError ?></div>
                 <?php endif; ?>
             </div>
             

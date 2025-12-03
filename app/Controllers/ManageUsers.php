@@ -4,14 +4,20 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Models\RegistrationModel;
+use App\Models\RfidModel;
 
 class ManageUsers extends BaseController
 {
     protected $userModel;
+    protected $registrationModel;
+    protected $rfidModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->registrationModel = new RegistrationModel();
+        $this->rfidModel = new RfidModel();
     }
 
     public function index()
@@ -20,6 +26,64 @@ class ManageUsers extends BaseController
             'members' => $this->userModel->findAll()
         ];
         return view('admin/manage_users', $data);
+    }
+
+    /**
+     * Check school ID for registration
+     * 
+     * POST /manage-users/check-school-id
+     */
+    public function checkSchoolId()
+    {
+        if (!$this->request->is('post')) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Invalid request method'
+            ])->setStatusCode(405);
+        }
+
+        $schoolId = trim($this->request->getPost('school_id') ?? '');
+
+        if (empty($schoolId)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'School ID is required.'
+            ])->setStatusCode(400);
+        }
+
+        // Check if already registered
+        $existingMember = $this->userModel->find($schoolId);
+        if ($existingMember) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'This ID is already registered.',
+                'already_registered' => true,
+                'member_data' => $existingMember
+            ])->setStatusCode(409);
+        }
+
+        // Check eligibility
+        $eligibilityCheck = $this->registrationModel->checkEligibility($schoolId);
+        if (!$eligibilityCheck['eligible']) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'You are not allowed to register for gym access.',
+                'eligible' => false,
+                'reason' => $eligibilityCheck['reason'] ?? 'Role not eligible'
+            ])->setStatusCode(403);
+        }
+
+        // Get school member info (if available)
+        $memberInfo = $this->registrationModel->getSchoolMemberInfo($schoolId);
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'School ID verified. Please complete registration.',
+            'eligible' => true,
+            'school_id' => $schoolId,
+            'member_info' => $memberInfo,
+            'suggested_user_type' => $eligibilityCheck['user_type'] ?? null
+        ]);
     }
 
     public function addUser()
@@ -35,9 +99,31 @@ class ManageUsers extends BaseController
         // Log the request for debugging
         log_message('info', 'Add user request received: ' . json_encode($this->request->getPost()));
 
+        $schoolId = trim($this->request->getPost('id') ?? '');
+
+        // Check if already registered
+        $existingMember = $this->userModel->find($schoolId);
+        if ($existingMember) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'This school ID is already registered.',
+                'already_registered' => true
+            ])->setStatusCode(409);
+        }
+
+        // Check eligibility
+        $eligibilityCheck = $this->registrationModel->checkEligibility($schoolId);
+        if (!$eligibilityCheck['eligible']) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'You are not allowed to register for gym access.',
+                'eligible' => false
+            ])->setStatusCode(403);
+        }
+
         // Get form data
         $data = [
-            'id' => $this->request->getPost('id'),
+            'id' => $schoolId,
             'first_name' => $this->request->getPost('first_name'),
             'middle_name' => $this->request->getPost('middle_name'),
             'last_name' => $this->request->getPost('last_name'),
@@ -62,7 +148,7 @@ class ManageUsers extends BaseController
 
         return $this->response->setJSON([
             'success' => true,
-            'message' => 'Member added successfully!',
+            'message' => 'Registration successful – this member can now enter the gym using their school ID!',
             'data' => $data
         ]);
     }
@@ -80,11 +166,12 @@ class ManageUsers extends BaseController
         // Log the request for debugging
         log_message('info', 'Edit user request received: ' . json_encode($this->request->getPost()));
 
-        $userId = $this->request->getPost('edit_user_id');
+        $oldUserId = $this->request->getPost('edit_user_id');
+        $newUserId = trim($this->request->getPost('edit_id'));
         
         // Get form data
         $data = [
-            'id' => $this->request->getPost('edit_id'),
+            'id' => $newUserId,
             'first_name' => $this->request->getPost('edit_first_name'),
             'middle_name' => $this->request->getPost('edit_middle_name'),
             'last_name' => $this->request->getPost('edit_last_name'),
@@ -95,8 +182,29 @@ class ManageUsers extends BaseController
             'status' => 'active'
         ];
 
+        // Check if user exists
+        $existingUser = $this->userModel->find($oldUserId);
+        if (!$existingUser) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'User not found'
+            ]);
+        }
+
+        // If ID is changing, check if new ID already exists
+        if ($oldUserId !== $newUserId) {
+            $userWithNewId = $this->userModel->find($newUserId);
+            if ($userWithNewId) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'This ID is already taken by another member.',
+                    'errors' => ['id' => 'ID already exists']
+                ]);
+            }
+        }
+
         // Validate data for editing
-        if (!$this->userModel->validateEdit($data)) {
+        if (!$this->userModel->validateEdit($data, $oldUserId)) {
             log_message('error', 'Validation failed: ' . json_encode($this->userModel->errors()));
             return $this->response->setJSON([
                 'success' => false,
@@ -105,13 +213,60 @@ class ManageUsers extends BaseController
             ]);
         }
 
-        // Update the user
-        if (!$this->userModel->update($userId, $data)) {
-            log_message('error', 'Update failed');
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Failed to update member'
-            ]);
+        // If ID is changing, we need to delete old and insert new
+        if ($oldUserId !== $newUserId) {
+            // Get the old user data to preserve timestamps if needed
+            $oldData = $existingUser;
+            
+            // Start database transaction for data integrity
+            $db = \Config\Database::connect();
+            $db->transStart();
+            
+            try {
+                // Update RFID attendance records first
+                $rfidUpdated = $db->table('rfid_attendance')
+                    ->where('member_id', $oldUserId)
+                    ->update(['member_id' => $newUserId]);
+                
+                log_message('info', "Updated {$rfidUpdated} RFID attendance records from {$oldUserId} to {$newUserId}");
+                
+                // Delete the old record
+                if (!$this->userModel->delete($oldUserId)) {
+                    throw new \Exception('Failed to delete old user record');
+                }
+                
+                // Insert new record with new ID
+                if (!$this->userModel->insert($data)) {
+                    throw new \Exception('Failed to insert new user record');
+                }
+                
+                // Commit transaction
+                $db->transComplete();
+                
+                if ($db->transStatus() === false) {
+                    throw new \Exception('Transaction failed');
+                }
+                
+            } catch (\Exception $e) {
+                // Rollback transaction on error
+                $db->transRollback();
+                log_message('error', 'Update failed: ' . $e->getMessage());
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to update member: ' . $e->getMessage(),
+                    'errors' => $this->userModel->errors()
+                ]);
+            }
+        } else {
+            // ID is not changing, just update normally
+            if (!$this->userModel->update($oldUserId, $data)) {
+                log_message('error', 'Update failed');
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to update member',
+                    'errors' => $this->userModel->errors()
+                ]);
+            }
         }
 
         log_message('info', 'User updated successfully: ' . json_encode($data));

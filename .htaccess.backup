@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Disable directory browsing
+Options -Indexes
+
+# CRITICAL: If request is for public folder, STOP immediately - do not process any more rules
+# This prevents redirect loops
+RewriteCond %{REQUEST_URI} ^/GYM_SYSTEM/public
+RewriteRule ^ - [L]
+
+# Redirect wrong URL patterns (full file paths) to correct path
+RewriteCond %{REQUEST_URI} ^/F:/ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/xammp/ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/htdocs/ [NC]
+RewriteRule ^(.*)$ /GYM_SYSTEM/public/ [R=301,L]
+
+# Only redirect if accessing root folder exactly (not if already in public)
+# This is a one-time redirect from /GYM_SYSTEM/ to /GYM_SYSTEM/public/
+RewriteCond %{REQUEST_URI} ^/GYM_SYSTEM/?$
+RewriteRule ^$ /GYM_SYSTEM/public/ [R=301,L]

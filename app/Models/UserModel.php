@@ -81,6 +81,9 @@ class UserModel extends Model
 
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
+    
+    // Private property for edit validation
+    private $oldUserId = null;
 
     // Callbacks
     protected $allowCallbacks = true;
@@ -123,9 +126,29 @@ class UserModel extends Model
     /**
      * Validate data for editing (allows same ID and email for current user)
      */
-    public function validateEdit($data)
+    public function validateEdit($data, $oldUserId = null)
     {
+        $this->oldUserId = $oldUserId;
         $this->validationRules = $this->validationRulesEdit;
+        
+        // If ID is changing, check uniqueness
+        if ($oldUserId && isset($data['id']) && $data['id'] !== $oldUserId) {
+            $existingUser = $this->find($data['id']);
+            if ($existingUser) {
+                $this->errors['id'] = 'ID already exists';
+                return false;
+            }
+        }
+        
+        // If email is provided and changing, check uniqueness
+        if (!empty($data['email']) && $oldUserId) {
+            $existingUser = $this->where('email', $data['email'])->first();
+            if ($existingUser && $existingUser['id'] !== $oldUserId) {
+                $this->errors['email'] = 'Email address already exists';
+                return false;
+            }
+        }
+        
         return $this->validate($data);
     }
 }
