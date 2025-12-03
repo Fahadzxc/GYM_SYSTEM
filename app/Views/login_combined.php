@@ -349,7 +349,76 @@
         </div>
     </div>
 
+    <!-- Success Sound - Your Custom MP3 File -->
+    <audio id="successSound" preload="auto">
+        <source src="<?= base_url('assets/sounds/ElevenLabs_Text_to_Speech_audio.mp3') ?>" type="audio/mpeg">
+    </audio>
+
     <script>
+        // ============================================
+        // Sound Effects
+        // SUCCESS = Your custom MP3 file
+        // ERROR = Generated beep sound
+        // ============================================
+
+        const successSound = document.getElementById('successSound');
+        let isSoundPlaying = false; // Prevent double play
+
+        // Audio context for error beep
+        let audioCtx = null;
+        
+        function ensureAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        // SUCCESS SOUND - Your custom MP3 file (with double-play protection)
+        function playSuccessSound() {
+            if (isSoundPlaying) {
+                console.log('Sound already playing, skipping...');
+                return;
+            }
+            console.log('Playing success sound (custom MP3)...');
+            isSoundPlaying = true;
+            successSound.currentTime = 0;
+            successSound.play().catch(e => console.log('Success sound error:', e.message));
+            
+            // Reset flag when sound ends
+            successSound.onended = function() {
+                isSoundPlaying = false;
+            };
+            
+            // Fallback reset after 5 seconds (in case onended doesn't fire)
+            setTimeout(() => { isSoundPlaying = false; }, 5000);
+        }
+
+        // ERROR SOUND - Beep only
+        function playErrorSound() {
+            console.log('Playing error beep...');
+            try {
+                const ctx = ensureAudioContext();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+
+                oscillator.frequency.value = 400;  // Error beep frequency
+                oscillator.type = 'square';        // Square wave for buzzer sound
+                gainNode.gain.value = 0.3;         // Volume
+
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.3);  // 300ms beep
+            } catch (e) {
+                console.error('Error beep failed:', e);
+            }
+        }
+
         // Tab switching
         document.addEventListener('DOMContentLoaded', function() {
             const tabButtons = document.querySelectorAll('.tab-btn');
@@ -421,8 +490,10 @@
                     isProcessing = false;
                     console.log('Response data:', data);
                     if (data.success) {
+                        playSuccessSound(); // Play success sound
                         showSuccess(data.message, data.member_data);
                     } else {
+                        playErrorSound(); // Play error sound
                         showError(data.message || 'An error occurred');
                         // Log error details for debugging
                         if (data.errors) {
@@ -435,6 +506,7 @@
                 })
                 .catch(error => {
                     isProcessing = false;
+                    playErrorSound(); // Play error sound for network error
                     console.error('Network Error:', error);
                     showError('Network error. Please check your connection and try again.');
                 })
