@@ -17,6 +17,11 @@
                     Manage Users
                 </a>
             </li>
+            <li class="nav-item <?= (uri_string() == 'members') ? 'active' : '' ?>">
+                <a href="<?= base_url('/members') ?>" class="nav-link">
+                    Members
+                </a>
+            </li>
             <li class="nav-item <?= (uri_string() == 'profile') ? 'active' : '' ?>">
                 <a href="<?= base_url('/profile') ?>" class="nav-link">
                     Profile

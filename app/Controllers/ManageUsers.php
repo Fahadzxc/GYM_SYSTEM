@@ -6,18 +6,21 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\RegistrationModel;
 use App\Models\RfidModel;
+use App\Models\PaymentsModel;
 
 class ManageUsers extends BaseController
 {
     protected $userModel;
     protected $registrationModel;
     protected $rfidModel;
+    protected $paymentsModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->registrationModel = new RegistrationModel();
         $this->rfidModel = new RfidModel();
+        $this->paymentsModel = new PaymentsModel();
     }
 
     public function index()
@@ -144,6 +147,50 @@ class ManageUsers extends BaseController
             ]);
         }
 
+        // If this is a faculty member, save payment/membership info
+        try {
+            if (isset($data['user_type']) && $data['user_type'] === 'faculty' && $this->request->getPost('package_name')) {
+                $pkg = $this->request->getPost('package_name');
+                $amount = $this->request->getPost('amount_paid');
+                
+                // Set default amount based on package if not provided
+                if (empty($amount) || $amount == 0) {
+                    if ($pkg === 'Monthly') $amount = 800;
+                    elseif ($pkg === 'Semester') $amount = 3000;
+                    elseif ($pkg === 'Annual') $amount = 6000;
+                    else $amount = 0;
+                }
+                
+                $paymentData = [
+                    'member_id' => $schoolId,
+                    'package_name' => $pkg,
+                    'amount_paid' => $amount,
+                    'status' => $this->request->getPost('payment_status') ?: 'paid',
+                    'start_date' => $this->request->getPost('start_date') ?: null,
+                    'end_date' => $this->request->getPost('end_date') ?: null,
+                    'created_at' => date('Y-m-d H:i:s')
+                ];
+
+                $this->paymentsModel->insert($paymentData);
+                log_message('info', 'Payment record added for member: ' . $schoolId . ' with amount: ' . $amount);
+            }
+        } catch (\Exception $e) {
+            // Log and continue — member was created but payments table may not exist yet
+            log_message('error', 'Failed to insert payment record: ' . $e->getMessage());
+        }
+
+        // Log activity
+        try {
+            $activityLogService = new \App\Services\ActivityLogService();
+            $activityLogService->logUserCreation(
+                session()->get('user_id'),
+                session()->get('email'),
+                $schoolId
+            );
+        } catch (\Exception $e) {
+            log_message('error', 'Activity log failed: ' . $e->getMessage());
+        }
+
         log_message('info', 'User added successfully: ' . json_encode($data));
 
         return $this->response->setJSON([
@@ -267,6 +314,21 @@ class ManageUsers extends BaseController
                     'errors' => $this->userModel->errors()
                 ]);
             }
+        }
+
+        // Log activity
+        try {
+            $activityLogService = new \App\Services\ActivityLogService();
+            $description = 'Updated user/member';
+            if ($oldUserId !== $newUserId) {
+                $description .= ' (ID changed: ' . $oldUserId . ' → ' . $newUserId . ')';
+            } else {
+                $description .= ' (ID: ' . $oldUserId . ')';
+            }
+            $activityLogService->log('user_update', $description, 
+                session()->get('user_id'), session()->get('email'));
+        } catch (\Exception $e) {
+            log_message('error', 'Activity log failed: ' . $e->getMessage());
         }
 
         log_message('info', 'User updated successfully: ' . json_encode($data));

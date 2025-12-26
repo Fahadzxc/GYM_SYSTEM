@@ -136,6 +136,8 @@ Manage Users
     </div>
 </div>
 
+<!-- Payment fields moved to separate Add Member flow -->
+
 <!-- Edit User Modal -->
 <div id="editUserModal" class="modal">
     <div class="modal-content">

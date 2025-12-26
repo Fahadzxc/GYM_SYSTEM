@@ -1,14 +1,22 @@
 <?= $this->extend('template') ?>
 
+<?= $this->section('title') ?>
+Generate Reports
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
+<div class="main-container">
+    <?= $this->include('sidebar') ?>
 
-<div class="content-wrapper">
-    <div class="page-header">
-        <h1>Generate Reports</h1>
-        <p>Generate and download reports for new users and attendance</p>
-    </div>
+    <div class="main-content">
+        <div class="content-header">
+            <h1 class="content-title">Generate Reports</h1>
+        </div>
 
-    <div class="reports-container">
+        <div class="content-panel">
+            <p class="muted">Generate and download reports for new users and attendance</p>
+
+            <div class="reports-container">
         <!-- New User Report Card -->
         <div class="report-card">
             <div class="report-card-header">
@@ -119,6 +127,8 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
             </div>
         </div>
     </div>
@@ -323,6 +333,38 @@
 let newUserReportData = [];
 let attendanceReportData = [];
 
+// Set default date range (last 30 days to today)
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+    
+    const startDateInput = document.getElementById('new_user_start_date');
+    const endDateInput = document.getElementById('new_user_end_date');
+    const attendanceStartInput = document.getElementById('attendance_start_date');
+    const attendanceEndInput = document.getElementById('attendance_end_date');
+    
+    if (startDateInput && !startDateInput.value) {
+        startDateInput.value = formatDate(thirtyDaysAgo);
+    }
+    if (endDateInput && !endDateInput.value) {
+        endDateInput.value = formatDate(today);
+    }
+    if (attendanceStartInput && !attendanceStartInput.value) {
+        attendanceStartInput.value = formatDate(thirtyDaysAgo);
+    }
+    if (attendanceEndInput && !attendanceEndInput.value) {
+        attendanceEndInput.value = formatDate(today);
+    }
+});
+
 // New User Report Form Submit
 document.getElementById('newUserReportForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -341,13 +383,17 @@ document.getElementById('newUserReportForm').addEventListener('submit', function
         if (data.success) {
             newUserReportData = data.data;
             displayNewUserReport(data);
+            if (data.count === 0) {
+                alert('No members found in the selected date range. Try selecting a wider date range.');
+            }
         } else {
             alert(data.message || 'Failed to generate report');
+            console.error('Report error:', data);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('An error occurred while generating the report');
+        alert('An error occurred while generating the report. Check console for details.');
     });
 });
 

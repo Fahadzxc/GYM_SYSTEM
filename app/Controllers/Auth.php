@@ -73,6 +73,30 @@ class Auth extends BaseController
             ];
             
             session()->set($sessionData);
+            
+            // Update last login (check if column exists first)
+            try {
+                $db->table('users')->where('id', $user['id'])->update(['last_login' => date('Y-m-d H:i:s')]);
+            } catch (\Exception $e) {
+                // Column might not exist yet - try to add it
+                try {
+                    $db->query("ALTER TABLE `users` ADD COLUMN `last_login` DATETIME NULL AFTER `updated_at`");
+                    $db->table('users')->where('id', $user['id'])->update(['last_login' => date('Y-m-d H:i:s')]);
+                } catch (\Exception $e2) {
+                    // Ignore if column addition fails
+                    log_message('debug', 'Last login column update failed: ' . $e2->getMessage());
+                }
+            }
+            
+            // Log activity
+            try {
+                $activityLogService = new \App\Services\ActivityLogService();
+                $activityLogService->logLogin($user['id'], $user['email'], true);
+            } catch (\Exception $e) {
+                // Log but don't fail login
+                log_message('error', 'Activity log failed: ' . $e->getMessage());
+            }
+            
             return redirect()->to('/dashboard')->with('success', 'Login successful!');
             
         } catch (\Exception $e) {
@@ -88,6 +112,19 @@ class Auth extends BaseController
     
     public function logout()
     {
+        // Log activity before destroying session
+        try {
+            if (session()->get('isLoggedIn')) {
+                $activityLogService = new \App\Services\ActivityLogService();
+                $activityLogService->logLogout(
+                    session()->get('user_id'),
+                    session()->get('email')
+                );
+            }
+        } catch (\Exception $e) {
+            log_message('error', 'Activity log failed: ' . $e->getMessage());
+        }
+        
         session()->destroy();
         return redirect()->to('/login')->with('success', 'You have been logged out successfully');
     }
@@ -131,11 +168,7 @@ class Auth extends BaseController
     
     public function profile()
     {
-        // Check if user is logged in
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')->with('error', 'Please login to access profile');
-        }
-        
-        return view('admin/profile');
+        // Redirect to Profile controller
+        return redirect()->to('/profile');
     }
 }

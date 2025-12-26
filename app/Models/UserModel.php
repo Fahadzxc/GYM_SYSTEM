@@ -21,6 +21,7 @@ class UserModel extends Model
         'phone_no',
         'email',
         'user_type',
+        'department',
         'status'
     ];
 
