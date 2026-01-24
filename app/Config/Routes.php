@@ -59,3 +59,5 @@ $routes->get('/members', 'Members::index');
 $routes->get('/members/dashboard', 'FacultyDashboard::index');
 $routes->post('/members/add', 'Members::add');
 $routes->post('/members/edit', 'Members::edit');
+$routes->get('/members/get-member-info', 'Members::getMemberInfo');
+$routes->post('/members/renew', 'Members::renew');

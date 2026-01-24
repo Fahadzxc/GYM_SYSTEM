@@ -114,15 +114,15 @@ class ManageUsers extends BaseController
             ])->setStatusCode(409);
         }
 
-        // Check eligibility
-        $eligibilityCheck = $this->registrationModel->checkEligibility($schoolId);
-        if (!$eligibilityCheck['eligible']) {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'You are not allowed to register for gym access.',
-                'eligible' => false
-            ])->setStatusCode(403);
-        }
+        // Optional: Check eligibility (commented out to match Add Member functionality)
+        // $eligibilityCheck = $this->registrationModel->checkEligibility($schoolId);
+        // if (!$eligibilityCheck['eligible']) {
+        //     return $this->response->setJSON([
+        //         'success' => false,
+        //         'message' => 'You are not allowed to register for gym access.',
+        //         'eligible' => false
+        //     ])->setStatusCode(403);
+        // }
 
         // Get form data
         $data = [
@@ -134,6 +134,7 @@ class ManageUsers extends BaseController
             'phone_no' => $this->request->getPost('phone_no'),
             'email' => $this->request->getPost('email'),
             'user_type' => $this->request->getPost('user_type'),
+            'department' => $this->request->getPost('department'),
             'status' => 'active'
         ];
 
@@ -147,9 +148,9 @@ class ManageUsers extends BaseController
             ]);
         }
 
-        // If this is a faculty member, save payment/membership info
+        // If this is a faculty or student member, save payment/membership info
         try {
-            if (isset($data['user_type']) && $data['user_type'] === 'faculty' && $this->request->getPost('package_name')) {
+            if (isset($data['user_type']) && ($data['user_type'] === 'faculty' || $data['user_type'] === 'student') && $this->request->getPost('package_name')) {
                 $pkg = $this->request->getPost('package_name');
                 $amount = $this->request->getPost('amount_paid');
                 
@@ -161,13 +162,25 @@ class ManageUsers extends BaseController
                     else $amount = 0;
                 }
                 
+                $start = !empty($this->request->getPost('start_date')) ? $this->request->getPost('start_date') : date('Y-m-d');
+                $end = !empty($this->request->getPost('end_date')) ? $this->request->getPost('end_date') : null;
+                if (empty($end)) {
+                    // compute end date based on package
+                    $sd = strtotime($start);
+                    if ($pkg === 'Monthly') $ed = strtotime('+1 month', $sd);
+                    elseif ($pkg === 'Semester') $ed = strtotime('+6 months', $sd);
+                    elseif ($pkg === 'Annual') $ed = strtotime('+1 year', $sd);
+                    else $ed = false;
+                    if ($ed) $end = date('Y-m-d', $ed);
+                }
+                
                 $paymentData = [
                     'member_id' => $schoolId,
                     'package_name' => $pkg,
                     'amount_paid' => $amount,
                     'status' => $this->request->getPost('payment_status') ?: 'paid',
-                    'start_date' => $this->request->getPost('start_date') ?: null,
-                    'end_date' => $this->request->getPost('end_date') ?: null,
+                    'start_date' => $start,
+                    'end_date' => $end,
                     'created_at' => date('Y-m-d H:i:s')
                 ];
 

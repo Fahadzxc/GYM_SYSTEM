@@ -38,7 +38,7 @@ class UserModel extends Model
         'last_name' => 'required|min_length[2]|max_length[50]',
         'email' => 'permit_empty|valid_email|is_unique[gym_members.email]',
         'phone_no' => 'permit_empty|min_length[10]|max_length[20]',
-        'user_type' => 'required|in_list[staff,athlete,faculty]'
+        'user_type' => 'required|in_list[staff,athlete,faculty,student]'
     ];
 
     // Validation rules for editing (allows same ID and email for current user)
@@ -48,7 +48,7 @@ class UserModel extends Model
         'last_name' => 'required|min_length[2]|max_length[50]',
         'email' => 'permit_empty|valid_email',
         'phone_no' => 'permit_empty|min_length[10]|max_length[20]',
-        'user_type' => 'required|in_list[staff,athlete,faculty]'
+        'user_type' => 'required|in_list[staff,athlete,faculty,student]'
     ];
 
     protected $validationMessages = [

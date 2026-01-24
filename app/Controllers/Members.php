@@ -63,6 +63,7 @@ class Members extends BaseController
             'phone_no' => isset($post['phone_no']) ? $post['phone_no'] : null,
             'email' => isset($post['email']) ? $post['email'] : null,
             'user_type' => isset($post['user_type']) ? $post['user_type'] : 'faculty',
+            'department' => isset($post['department']) ? $post['department'] : null,
             'status' => 'active'
         ];
 
@@ -73,8 +74,8 @@ class Members extends BaseController
                 return $this->response->setJSON(['success' => false, 'message' => 'Validation failed', 'errors' => $errors]);
             }
 
-            // Insert payment if faculty and payment info provided
-            if (!empty($data['user_type']) && $data['user_type'] === 'faculty' && !empty($post['package_name'])) {
+            // Insert payment if faculty or student and payment info provided
+            if (!empty($data['user_type']) && ($data['user_type'] === 'faculty' || $data['user_type'] === 'student') && !empty($post['package_name'])) {
                 try {
                     $payments = new PaymentsModel();
                     // enforce sensible defaults: payment status paid, start_date = today, end_date computed by package
@@ -246,6 +247,128 @@ class Members extends BaseController
         } catch (\Exception $e) {
             log_message('error', 'Member edit error: ' . $e->getMessage());
             return $this->response->setJSON(['success' => false, 'message' => 'Server error']);
+        }
+    }
+
+    /**
+     * Get member information by ID (for renewal form)
+     */
+    public function getMemberInfo()
+    {
+        $memberId = $this->request->getGet('id');
+        
+        if (empty($memberId)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Member ID required']);
+        }
+
+        try {
+            $member = $this->userModel->find($memberId);
+            if (!$member) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Member not found']);
+            }
+
+            return $this->response->setJSON([
+                'success' => true,
+                'member' => $member
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Get member info error: ' . $e->getMessage());
+            return $this->response->setJSON(['success' => false, 'message' => 'Server error']);
+        }
+    }
+
+    /**
+     * Handle membership renewal
+     */
+    public function renew()
+    {
+        if (strtolower($this->request->getMethod()) !== 'post') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method']);
+        }
+
+        $post = $this->request->getPost();
+        $memberId = $post['member_id'] ?? null;
+
+        if (!$memberId) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Member ID required']);
+        }
+
+        // Verify member exists
+        $member = $this->userModel->find($memberId);
+        if (!$member) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Member not found']);
+        }
+
+        // Validate required fields
+        if (empty($post['package_name']) || empty($post['start_date'])) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Package and start date are required']);
+        }
+
+        try {
+            $payments = new PaymentsModel();
+            $pkg = $post['package_name'];
+            $amount = isset($post['amount_paid']) ? $post['amount_paid'] : null;
+            
+            // Set default amount based on package if not provided or is 0
+            if (empty($amount) || $amount == 0) {
+                if ($pkg === 'Monthly') $amount = 800;
+                elseif ($pkg === 'Semester') $amount = 3000;
+                elseif ($pkg === 'Annual') $amount = 6000;
+                else $amount = 0;
+            }
+
+            $start = $post['start_date'];
+            $end = !empty($post['end_date']) ? $post['end_date'] : null;
+            
+            // Compute end date if not provided
+            if (empty($end)) {
+                $sd = strtotime($start);
+                if ($pkg === 'Monthly') $ed = strtotime('+1 month', $sd);
+                elseif ($pkg === 'Semester') $ed = strtotime('+6 months', $sd);
+                elseif ($pkg === 'Annual') $ed = strtotime('+1 year', $sd);
+                else $ed = false;
+                if ($ed) $end = date('Y-m-d', $ed);
+            }
+
+            $paymentData = [
+                'member_id' => $memberId,
+                'package_name' => $pkg,
+                'amount_paid' => $amount,
+                'status' => !empty($post['payment_status']) ? $post['payment_status'] : 'paid',
+                'start_date' => $start,
+                'end_date' => $end,
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+
+            // Insert new payment record (renewal creates a new payment entry)
+            $payments->insert($paymentData);
+
+            // Log activity
+            try {
+                $activityLogService = new \App\Services\ActivityLogService();
+                $memberName = ($member['first_name'] ?? '') . ' ' . ($member['last_name'] ?? '');
+                $userId = session()->get('user_id');
+                $userEmail = session()->get('email');
+                
+                if (empty($userId)) {
+                    log_message('error', 'Cannot log activity: user_id is empty in session');
+                } else {
+                    $result = $activityLogService->log('membership_renewal', 'Renewed membership for member (ID: ' . $memberId . ', Name: ' . trim($memberName) . ', Package: ' . $pkg . ')',
+                        $userId, $userEmail);
+                    if (!$result) {
+                        log_message('error', 'Activity log insert returned false for membership renewal');
+                    } else {
+                        log_message('info', 'Activity logged successfully: Renewed membership for ' . $memberId);
+                    }
+                }
+            } catch (\Exception $e) {
+                log_message('error', 'Activity log failed: ' . $e->getMessage() . ' | Trace: ' . $e->getTraceAsString());
+            }
+
+            return $this->response->setJSON(['success' => true, 'message' => 'Membership renewed successfully']);
+        } catch (\Exception $e) {
+            log_message('error', 'Renewal error: ' . $e->getMessage());
+            return $this->response->setJSON(['success' => false, 'message' => 'Server error: ' . $e->getMessage()]);
         }
     }
 }
